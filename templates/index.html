@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Job Board - Home</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: #0f172a;
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            border-bottom: 2px solid #1e293b;
+        }
+
+        .navbar .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .navbar .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links .btn-primary {
+            background: #38bdf8;
+            color: #0f172a;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .nav-links .btn-primary:hover {
+            background: #7dd3fc;
+            color: #0f172a;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-top: 12px;
+        }
+
+        .hero .search-box {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero .search-box input {
+            padding: 14px 24px;
+            border-radius: 40px;
+            border: none;
+            width: 380px;
+            max-width: 90%;
+            font-size: 1rem;
+            background: #1e293b;
+            color: #ffffff;
+            outline: none;
+            border: 1px solid #334155;
+        }
+
+        .hero .search-box input::placeholder {
+            color: #64748b;
+        }
+
+        .hero .search-box button {
+            padding: 14px 32px;
+            border-radius: 40px;
+            border: none;
+            background: #38bdf8;
+            color: #0f172a;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .hero .search-box button:hover {
+            background: #7dd3fc;
+        }
+
+        /* ===== JOBS SECTION ===== */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .section-header a {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .section-header a:hover {
+            text-decoration: underline;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+        }
+
+        .job-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            transition: 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .job-card:hover {
+            transform: translateY(-6px);
+            border-color: #38bdf8;
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.12);
+        }
+
+        .job-card .badge {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #1e293b;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .job-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .job-card .meta {
+            font-size: 0.9rem;
+            color: #64748b;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 8px 0 12px 0;
+        }
+
+        .job-card .meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .job-card .salary {
+            font-weight: 700;
+            color: #0f172a;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .job-card .description {
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .job-card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 16px;
+        }
+
+        .job-card .card-footer .company {
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #0f172a;
+            border: 1.5px solid #e2e8f0;
+        }
+
+        .btn-outline:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+
+        .btn-primary {
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #1e293b;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 40px;
+        }
+
+        .footer a {
+            color: #38bdf8;
+            text-decoration: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .search-box input {
+                width: 100%;
+            }
+
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="logo">💼 <span>Job</span>Board</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/jobs">All Jobs</a>
+            <a href="/post_job">📌 Post a Job</a>
+            <a href="/applications">📄 Applications</a>
+            <a href="/dashboard">📊 Dashboard</a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <h1>Find Your <span>Dream Job</span></h1>
+        <p>Explore thousands of opportunities from top companies.</p>
+
+        <div class="search-box">
+            <form action="/search" method="GET">
+                <input type="text" name="q" placeholder="🔍 Search by title, category..." />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ===== RECENT JOBS ===== -->
+    <div class="container">
+        <div class="section-header">
+            <h2>🔥 Recent Jobs</h2>
+            <a href="/jobs">View all →</a>
+        </div>
+
+        <div class="jobs-grid">
+            {% for job in jobs %}
+            <div class="job-card">
+                <span class="badge">{{ job.category }}</span>
+                <h3>{{ job.title }}</h3>
+                <div class="meta">
+                    <span>📍 {{ job.location }}</span>
+                    <span>🏷️ {{ job.category }}</span>
+                </div>
+                <div class="salary">💰 {{ job.salary or 'Negotiable' }}</div>
+                <div class="description">
+                    {{ job.description[:120] }}...
+                </div>
+                <div class="card-footer">
+                    <span class="company">🏢 {{ job.employer.company_name }}</span>
+                    <a href="/job/{{ job.id }}" class="btn btn-outline">View Details →</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer">
+        <p>💼 Job Board Platform — Built with Flask & SQLite for CodeAlpha Internship</p>
+        <p style="margin-top: 6px;">
+            <a href="https://github.com/tumhara-username/CodeAlpha_Job_Board" target="_blank">GitHub</a> &middot;
+            <a href="#">Privacy</a> &middot;
+            <a href="#">Contact</a>
+        </p>
+    </div>
+
+</body>
+</html>

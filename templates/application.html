@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications - Job Board</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .navbar h1 { font-size: 2rem; }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .app-table {
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .app-table th, .app-table td {
+            padding: 15px;
+            text-align: left;
+        }
+        .app-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .app-table td { border-bottom: 1px solid #e0e0e0; }
+        .status-pending { color: #ffc107; font-weight: bold; }
+        .status-shortlisted { color: #17a2b8; font-weight: bold; }
+        .status-rejected { color: #dc3545; font-weight: bold; }
+        .status-select { padding: 5px; border-radius: 5px; border: 1px solid #ddd; }
+        .update-btn {
+            padding: 5px 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .no-data { text-align: center; padding: 60px; color: #999; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>📄 All Applications</h1>
+        <a href="/">← Back to Home</a>
+    </div>
+
+    <div class="container">
+        {% if applications %}
+        <table class="app-table">
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>Job Title</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                    <th>Update Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td>{{ app.candidate.name }}</td>
+                    <td>{{ app.job.title }}</td>
+                    <td>{{ app.applied_date.strftime('%Y-%m-%d') }}</td>
+                    <td class="status-{{ app.status.lower() }}">{{ app.status }}</td>
+                    <td>
+                        <form method="POST" action="/update_status/{{ app.id }}">
+                            <select name="status" class="status-select">
+                                <option value="Pending" {% if app.status == "Pending" %}selected{% endif %}>Pending</option>
+                                <option value="Shortlisted" {% if app.status == "Shortlisted" %}selected{% endif %}>Shortlisted</option>
+                                <option value="Rejected" {% if app.status == "Rejected" %}selected{% endif %}>Rejected</option>
+                            </select>
+                            <button type="submit" class="update-btn">Update</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="no-data">📭 No applications submitted yet.</div>
+        {% endif %}
+    </div>
+</body>
+</html>

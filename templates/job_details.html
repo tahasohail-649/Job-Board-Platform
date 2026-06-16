@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ job.title }} - Job Board</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .navbar h1 { font-size: 2rem; }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .job-detail {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .job-detail h1 { color: #333; margin-bottom: 10px; }
+        .job-detail .meta { color: #666; margin: 10px 0; }
+        .job-detail .salary { font-size: 1.5rem; color: #667eea; font-weight: bold; }
+        .job-detail .description { margin: 20px 0; line-height: 1.8; color: #444; }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .btn:hover { opacity: 0.9; }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>💼 {{ job.title }}</h1>
+        <a href="/jobs">← Back to Jobs</a>
+    </div>
+
+    <div class="container">
+        <div class="job-detail">
+            <h1>{{ job.title }}</h1>
+            <div class="meta">🏢 {{ job.employer.company_name }} | 📍 {{ job.location }}</div>
+            <div class="meta">🏷️ Category: {{ job.category }} | 📅 Posted: {{ job.posted_date.strftime('%B %d, %Y') }}</div>
+            <div class="salary">💰 {{ job.salary }}</div>
+            <div class="description">{{ job.description }}</div>
+            <a href="/apply/{{ job.id }}" class="btn">📝 Apply Now</a>
+        </div>
+        <a href="/jobs" class="back-btn">← Back to all jobs</a>
+    </div>
+</body>
+</html>

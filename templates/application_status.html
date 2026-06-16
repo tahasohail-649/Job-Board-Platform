@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Status - Job Board</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f6fa;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .navbar h1 { font-size: 2rem; }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .status-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .status-card .icon { font-size: 4rem; margin-bottom: 15px; }
+        .status-card h2 { color: #333; }
+        .status-card p { color: #666; margin: 10px 0; }
+        .status-badge {
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .status-badge.pending { background: #fff3cd; color: #ffc107; }
+        .status-badge.shortlisted { background: #d4edda; color: #17a2b8; }
+        .status-badge.rejected { background: #f8d7da; color: #dc3545; }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>📩 Application Status</h1>
+        <a href="/">← Back to Home</a>
+    </div>
+
+    <div class="container">
+        <div class="status-card">
+            <div class="icon">📄</div>
+            <h2>{{ app.candidate.name }}</h2>
+            <p>Applied for: <strong>{{ app.job.title }}</strong></p>
+            <p>at {{ app.job.employer.company_name }}</p>
+            <br>
+            <div class="status-badge {{ app.status.lower() }}">
+                {{ app.status }}
+            </div>
+            <p style="margin-top: 15px;">Applied on: {{ app.applied_date.strftime('%B %d, %Y') }}</p>
+            <a href="/jobs" class="btn">Browse More Jobs</a>
+        </div>
+    </div>
+</body>
+</html>
