@@ -15,37 +15,54 @@ A full-featured Job Board Platform built with **Flask** and **SQLite** as part o
 - ✅ Employer & candidate management
 
 ---
+## Project Structure
 
-## CodeAlpha_Job_Board/
-│
-├── app.py
-├── models.py
-├── requirements.txt
-├── uploads/ # Resume files stored here
-│
-└── templates/
-├── index.html # Homepage
-├── jobs.html # All jobs with filters
-├── job_detail.html # Single job view
-├── post_job.html # Post a new job
-├── apply_job.html # Job application form
-├── applications.html # All applications
-├── application_status.html # Application status
-└── dashboard.html # Admin dashboard
+```
+fyp-deepfake-detector/
+├── api/
+│   └── main.py              # FastAPI backend (image / audio / video / gradcam endpoints)
+├── src/
+│   ├── dataset.py           # Visual dataset loader (FaceForensics++, Celeb-DF, DFDC)
+│   ├── train.py             # EfficientNet-B0 trainer
+│   ├── train_xception.py    # XceptionNet trainer
+│   ├── train_vit.py         # ViT-Small trainer
+│   ├── ensemble.py          # Visual ensemble inference
+│   ├── evaluate_ensemble.py # Visual ensemble evaluation
+│   ├── audio_dataset.py     # ASVspoof2019 LA dataset loader
+│   ├── train_audio.py       # LCNN trainer
+│   ├── audio_classifier.py  # LCNN inference
+│   ├── evaluate_audio.py    # Audio evaluation (EER, AUC)
+│   ├── multimodal_fusion.py # MultimodalDetector — combines visual + audio
+│   └── gradcam.py           # Grad-CAM explainability
+├── frontend/
+│   └── index.html           # Web UI (drag-drop, animated verdict, history, heatmap)
+├── checkpoints/             # Model weights (not tracked in git)
+├── logs/                    # Training/eval logs and JSON results
+├── requirements-api.txt     # FastAPI dependencies
+└── requirements-mlops.txt   # Training dependencies
+```
+
 ---
-**Create a virtual environment (optional but recommended)
-bash
+
+### 1. Environment
+```bash
 python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-3. Install dependencies
-bash
+source venv/bin/activate 
+```
+
+### 2.Install dependencies
+```bash
 pip install -r requirements.txt
-4. Run the application
-bash
+```
+
+### 3. Run the application
+```bash
 python app.py
-5. Open in browser
-text
-http://127.0.0.1:5000**
+```
+
+Open `http://127.0.0.1:5000`
+
+---
 
 ## 🛠️ Tech Stack
 
